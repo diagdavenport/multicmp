@@ -1,0 +1,37 @@
+---
+title: "README"
+author: "ddd"
+date: "March 19, 2017"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## multicmp
+
+multicmp is a toolkit for flexible modeling of multivariate count data, especially in the presence of data dispersion. Currently the package only supports bivariate data. Future development will extend the package to higher-dimensional data.
+
+[The two uses are for hypothesis testing of under/over-dispersion and parameter estimation?]
+
+To use multicmp, one will first need to install the following two packages: 
+
+```R
+  install.packages("numDeriv")
+  install.packages("stats")
+````
+
+One can install the latest released version of multicmp from CRAN with:
+
+```R
+  install.packages("multicmp")
+````
+
+## Using multicmp
+
+To get started with multicmp right away, read the notes below. For a more detailed and technical description of the bivariate COMPoisson distribution, see [Sellers et al. (2016)](http://dx.doi.org/10.1016/j.jmva.2016.04.007).
+
+The multicmp package houses the _accidents_ data set (Famoye and Consul, 1995)
+
+[How exactly will we show the functions in action? The computations take a while on my machine. Is it worthwhile even to have an example here?]
