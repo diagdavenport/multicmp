@@ -7,6 +7,8 @@
 ## Output: MLEs (lambda, nu, p00, p10, p01 and p11), negative LL. ##
 ####################################################################
 
+## Added 3/22/17: LRT (nu=1) and bivariate Poisson model ##
+
 ComputeConstantBCMPests <- function(data,max,startvalues=NULL) {
 	if (dim(data)[2] != 2) {
 		stop('data must have 2 columns')
@@ -22,6 +24,9 @@ ComputeConstantBCMPests <- function(data,max,startvalues=NULL) {
 		nll <- -1*sum(log(dbivCMP(lambda=lambda,nu=nu,bivprob=p,x=x,y=y,maxit=maxit)))
 		return(nll)
 	}
+	
+	invisible(capture.output(bp <- simple.bp(x,y)))
+	
 	# Starting Values #
 	if (is.null(startvalues)) {
 		p10 = .25
@@ -39,7 +44,26 @@ ComputeConstantBCMPests <- function(data,max,startvalues=NULL) {
 		lambda_start = startvalues[1]
 		nu_start = startvalues[2]
 	}
+	
 	# NLMINB to find MLEs #
-	BCMPests <- nlminb(start=c(lambda_start,nu_start,p00,p01,p10,p11), minusloglike, lower = c(rep(0,6)), upper = c(Inf,Inf,Inf,Inf,Inf,Inf),control=list(trace=1,iter.max=1000))
-	return(list(par=c(BCMPests$par[1:2],BCMPests$par[3:6]/sum(BCMPests$par[3:6])),negll=BCMPests$obj))
+	cat("Iterating...", "\n")
+	BCMPests <- nlminb(start=c(lambda_start,nu_start,p00,p01,p10,p11), minusloglike, lower = c(rep(0,6)), upper = c(Inf,Inf,Inf,Inf,Inf,Inf),control=list(trace=10,iter.max=1000))
+	LRT_bpd <- -2*(bp$loglikelihood[length(bp$loglikelihood)] - (-1*BCMPests$obj))
+	p_bpd <- 1 - pchisq(abs(LRT_bpd),df=1)
+	
+	# prepare tabular data for printing
+	cat("\n", "The parameter estimates are as follows:","\n")
+	par.est <- data.frame("Parameter" = c("lambda", "nu", "p00", "p10", "p01", "p11") , "MLE" = c(BCMPests$par[1:2],BCMPests$par[3:6]/sum(BCMPests$par[3:6])) , "SE" = rep("?", 6))
+	print(par.est)
+
+	cat("\n" , "Hypothesis test results:","\n")
+	hyp.tst <- data.frame("Likelihood ratio test" = LRT_bpd, "p-value" = p_bpd)
+	print(hyp.tst)
+	
+	cat("\n")
+	
+	# finally return results
+	return(list(par=c(BCMPests$par[1:2],BCMPests$par[3:6]/sum(BCMPests$par[3:6])),negll=BCMPests$obj,LRT_bpd=LRT_bpd,p_bpd=p_bpd))
+	
 }
+

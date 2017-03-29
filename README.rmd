@@ -30,8 +30,21 @@ One can install the latest released version of multicmp from CRAN with:
 
 ## Using multicmp
 
-To get started with multicmp right away, read the notes below. For a more detailed and technical description of the bivariate COMPoisson distribution, see [Sellers et al. (2016)](http://dx.doi.org/10.1016/j.jmva.2016.04.007).
+To get started with multicmp right away, read the notes below.
+For a more detailed and technical description of the bivariate COMPoisson distribution, see [Sellers et al. (2016)](http://dx.doi.org/10.1016/j.jmva.2016.04.007).
 
-The multicmp package houses the _accidents_ data set (Famoye and Consul, 1995)
+The multicmp package houses the _accidents_ data set (Arbous and Kerrich, 1951)
 
-[How exactly will we show the functions in action? The computations take a while on my machine. Is it worthwhile even to have an example here?]
+```{r}
+xy <- read.table("BivariateAccidentData.txt", header = T)
+
+source('R/dbivcmp.r')
+source('R/suma.r')
+source('R/pbivpois.R')
+source('R/simple.bp.R')
+source('R/ComputeConstantBCMPests.R', echo=TRUE)
+
+ComputeConstantBCMPests(xy, 20)
+
+`````
+
