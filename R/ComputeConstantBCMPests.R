@@ -1,3 +1,24 @@
+#' Bivariate COM-Poisson Parameter Estimation.
+#'
+#' \code{func_name} computes the maximum likelihood estimates of a bivariate COM-Poisson distribution for given count data.
+#'
+#' @param data A two-column dataset of counts.
+#' @param max [Set tolerance for precision? Maximum iterations for optimization?].
+#' @param startvalues A vector of starting values for maximum likelihood estimation. The values are read as follows: c(lambda, nu, p00, p10, p01, p11).
+#'     The default is c(1,1, 0.25, 0.25, 0.25, 0.25).
+#' @return \code{func_name} will return a list of five elements: $par (Parameter Estimates), $negll (Negative Log-Likelihood), $LRTbpd (Hypothesis Test Statistic),
+#'     $pbpd (Hypothesis Test P-Value), and $se (Standard Errors).
+#'     
+#' @examples
+#' ## Standard usage
+#' data(accidents)
+#' ComputeConstantBCMPests(accidents, 100, c(1.3, .08 , .25 , .25 , .25 , .25))
+#'
+#' @import numDeriv
+#' @import stats
+#'
+#' @export
+
 ####################################################################
 ## Program name: ComputeConstantBCMPests.R                        ##
 ## Authors: Kimberly Sellers and Darcy Steeg Morris               ##
@@ -61,19 +82,18 @@ ComputeConstantBCMPests <- function(data,max,startvalues=NULL) {
 	par.est <- data.frame("Parameter" = c("lambda", "nu", "p00", "p10", "p01", "p11")
 	                     , "MLE" = c(BCMPests$par[1:2],BCMPests$par[3:6]/sum(BCMPests$par[3:6])) 
 	                     , "SE" = se)
-	print(par.est)
+	print(par.est, row.names = F)
 
 	cat("\n", "Log-likelihood ($negll):", BCMPests$obj , "\n")
 	
-	cat("\n" , "Dispersion hypothesis test statistic ($LRT_bpd) and p-value ($p_bpd):","\n")
+	cat("\n" , "Dispersion hypothesis test statistic ($LRTbpd) and p-value ($pbpd):","\n")
 	hyp.tst <- data.frame("Likelihood ratio test" = LRT_bpd, "p-value" = p_bpd)
-	print(hyp.tst)
+	print(hyp.tst, row.names = F)
 	
 	cat("\n")
 	
 	# quietly return list of results
-	invisible(list(par=c(BCMPests$par[1:2],BCMPests$par[3:6]/sum(BCMPests$par[3:6])),negll=BCMPests$obj,LRT_bpd=LRT_bpd,p_bpd=p_bpd, se = se))
-	
+	invisible(list(par=c(BCMPests$par[1:2],BCMPests$par[3:6]/sum(BCMPests$par[3:6])),negll=BCMPests$obj,LRTbpd=LRT_bpd,pbpd=p_bpd, se = se))
 }
 
 

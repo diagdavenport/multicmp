@@ -33,7 +33,7 @@ For a more detailed and technical description of the bivariate COM-Poisson distr
 
 The multicmp package houses the _accidents_ data set (Arbous and Kerrich, 1951)
 
-```{r, include=FALSE}
+```{r, echo=FALSE}
 # helper loading to be hidden
 
 library(numDeriv)
@@ -49,7 +49,7 @@ source('R/ComputeConstantBCMPests.R')
 
 ```{r}
 
-ComputeConstantBCMPests(accidents, 20)
+ComputeConstantBCMPests(accidents, 100,startvalues = c(1.3, .08 , .25 , .25 , .25 , .25))
 
 `````
 
