@@ -1,18 +1,18 @@
 #' Bivariate COM-Poisson Parameter Estimation.
 #'
-#' \code{func_name} computes the maximum likelihood estimates of a bivariate COM-Poisson distribution for given count data.
+#' \code{multicmpests} computes the maximum likelihood estimates of a bivariate COM-Poisson distribution for given count data.
 #'
 #' @param data A two-column dataset of counts.
-#' @param max [Set tolerance for precision? Maximum iterations for optimization?].
+#' @param max Truncation term for infinite summation associated the z function. See paper for details.
 #' @param startvalues A vector of starting values for maximum likelihood estimation. The values are read as follows: c(lambda, nu, p00, p10, p01, p11).
 #'     The default is c(1,1, 0.25, 0.25, 0.25, 0.25).
-#' @return \code{func_name} will return a list of five elements: $par (Parameter Estimates), $negll (Negative Log-Likelihood), $LRTbpd (Hypothesis Test Statistic),
-#'     $pbpd (Hypothesis Test P-Value), and $se (Standard Errors).
+#' @return \code{multicmpests} will return a list of five elements: $par (Parameter Estimates), $negll (Negative Log-Likelihood), $LRTbpd (Dispersion Test Statistic),
+#'     $pbpd (Dispersion Test P-Value), and $se (Standard Errors).
 #'     
 #' @examples
 #' ## Standard usage
 #' data(accidents)
-#' ComputeConstantBCMPests(accidents, 100, c(1.3, .08 , .25 , .25 , .25 , .25))
+#' multicmpests(accidents)
 #'
 #' @import numDeriv
 #' @import stats
@@ -20,7 +20,7 @@
 #' @export
 
 ####################################################################
-## Program name: ComputeConstantBCMPests.R                        ##
+## Program name: multicmpests.R                                   ##
 ## Authors: Kimberly Sellers and Darcy Steeg Morris               ##
 ## Date: 8/20/2015                                                ##
 ## Decription: Estimates BCMP parameters via ML.                  ##
@@ -30,7 +30,7 @@
 
 ## Added 3/22/17: LRT (nu=1) and bivariate Poisson model ##
 
-ComputeConstantBCMPests <- function(data,max,startvalues=NULL) {
+multicmpests <- function(data,max = 100,startvalues=NULL) {
 	if (dim(data)[2] != 2) {
 		stop('data must have 2 columns')
 	}
@@ -70,7 +70,8 @@ ComputeConstantBCMPests <- function(data,max,startvalues=NULL) {
 	cat("Iterating...", "\n")
 	BCMPests <- nlminb(start=c(lambda_start,nu_start,p00,p01,p10,p11), minusloglike, lower = c(rep(0,6)), upper = c(Inf,Inf,Inf,Inf,Inf,Inf),control=list(trace=10,iter.max=1000))
 	
-	H <- invisible(hessian(minusloglike, BCMPests$par))
+	# H <- invisible(hessian(minusloglike, BCMPests$par))
+	H <- invisible(optimHess(BCMPests$par , minusloglike))
 
 	se <- sqrt(diag(solve(H)))
 	

@@ -38,7 +38,7 @@ The multicmp package houses the _accidents_ data set (Arbous and Kerrich, 1951)
 
 library(numDeriv)
 load("data/accidents.rdata")
-source('R/ComputeConstantBCMPests.R')
+source('R/multicmpests.R')
 
 ````
 
@@ -49,7 +49,7 @@ source('R/ComputeConstantBCMPests.R')
 
 ```{r}
 
-ComputeConstantBCMPests(accidents, 100,startvalues = c(1.3, .08 , .25 , .25 , .25 , .25))
+multicmpests(accidents)
 
 `````
 
