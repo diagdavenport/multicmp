@@ -3,3 +3,4 @@
 export(multicmpests)
 import(numDeriv)
 import(stats)
+import(utils)
