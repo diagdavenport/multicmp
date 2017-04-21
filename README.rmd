@@ -13,7 +13,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 multicmp is a toolkit containing statistical analysis models motivated by multivariate forms of the Conway-Maxwell-Poisson (COM-Poisson) distribution for flexible modeling of multivariate count data, especially in the presence of data dispersion, via the bivariate COM-Poisson distribution described in [Sellers et al. (2016)](http://dx.doi.org/10.1016/j.jmva.2016.04.007). Currently the package only supports bivariate data. Future development will extend the package to higher-dimensional data.
 
-To use multicmp, one will first need to install the following two packages: 
+Note that multicmp references bivpois (Karlis and Ntzoufras).
+
+To use multicmp, one will first need to install the following two packages:
 
 ```R
   install.packages("numDeriv")

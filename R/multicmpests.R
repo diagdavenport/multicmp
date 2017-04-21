@@ -1,19 +1,21 @@
 #' Bivariate COM-Poisson Parameter Estimation.
 #'
-#' \code{multicmpests} computes the maximum likelihood estimates of a bivariate COM-Poisson distribution for given count data.
+#' \code{multicmpests} computes the maximum likelihood estimates of a bivariate COM-Poisson distribution for given count data and conducts a test for significant data dispersion, relative to a bivariate poisson model.
+#'     The bivariate case is addressed via the bivpois package by Karlis and Ntzoufras.
 #'
 #' @param data A two-column dataset of counts.
 #' @param max Truncation term for infinite summation associated the z function. See paper for details.
 #' @param startvalues A vector of starting values for maximum likelihood estimation. The values are read as follows: c(lambda, nu, p00, p10, p01, p11).
 #'     The default is c(1,1, 0.25, 0.25, 0.25, 0.25).
-#' @return \code{multicmpests} will return a list of five elements: $par (Parameter Estimates), $negll (Negative Log-Likelihood), $LRTbpd (Dispersion Test Statistic),
-#'     $pbpd (Dispersion Test P-Value), and $se (Standard Errors).
+#' @return \code{multicmpests} will return a list of four elements: $par (Parameter Estimates), $negll (Negative Log-Likelihood), $LRTbpd (Dispersion Test Statistic), and
+#'     $pbpd (Dispersion Test P-Value).
 #'     
 #' @examples
 #' ## Standard usage
 #' data(accidents)
 #' multicmpests(accidents)
 #'
+#' @import utils
 #' @import numDeriv
 #' @import stats
 #'
@@ -70,19 +72,14 @@ multicmpests <- function(data,max = 100,startvalues=NULL) {
 	cat("Iterating...", "\n")
 	BCMPests <- nlminb(start=c(lambda_start,nu_start,p00,p01,p10,p11), minusloglike, lower = c(rep(0,6)), upper = c(Inf,Inf,Inf,Inf,Inf,Inf),control=list(trace=10,iter.max=1000))
 	
-	# H <- invisible(hessian(minusloglike, BCMPests$par))
-	H <- invisible(optimHess(BCMPests$par , minusloglike))
-
-	se <- sqrt(diag(solve(H)))
-	
 	LRT_bpd <- -2*(bp$loglikelihood[length(bp$loglikelihood)] - (-1*BCMPests$obj))
 	p_bpd <- 1 - pchisq(abs(LRT_bpd),df=1)
 	
 	# prepare tabular data for printing
-	cat("\n", "The parameter estimates ($par) and standard errors ($se) are as follows:","\n")
+	cat("\n", "The parameter estimates ($par) are as follows:","\n")
 	par.est <- data.frame("Parameter" = c("lambda", "nu", "p00", "p10", "p01", "p11")
 	                     , "MLE" = c(BCMPests$par[1:2],BCMPests$par[3:6]/sum(BCMPests$par[3:6])) 
-	                     , "SE" = se)
+	                     )
 	print(par.est, row.names = F)
 
 	cat("\n", "Log-likelihood ($negll):", BCMPests$obj , "\n")
@@ -94,7 +91,7 @@ multicmpests <- function(data,max = 100,startvalues=NULL) {
 	cat("\n")
 	
 	# quietly return list of results
-	invisible(list(par=c(BCMPests$par[1:2],BCMPests$par[3:6]/sum(BCMPests$par[3:6])),negll=BCMPests$obj,LRTbpd=LRT_bpd,pbpd=p_bpd, se = se))
+	invisible(list(par=c(BCMPests$par[1:2],BCMPests$par[3:6]/sum(BCMPests$par[3:6])),negll=BCMPests$obj,LRTbpd=LRT_bpd,pbpd=p_bpd))
 }
 
 
