@@ -10,13 +10,12 @@
  \item{y}{Number of shunter accidents between 1943 and 1947}
 }}
 \source{
-(Arbous and Kerrich, 1951)
+A. Arbous, J.E. Kerrick, Accident statistics and the concept of accident proneness, Biometrics 7 (1951) 340-432.
 }
 \usage{
 accidents
 }
 \description{
 The number of accidents incurred by 122 shunters in two consecutive year periods, namely 1937 - 1942 and 1943 - 1947
-description
 }
 \keyword{datasets}

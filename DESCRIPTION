@@ -1,6 +1,6 @@
 Package: multicmp
 Type: Package
-Title: Flexible Modeling of Multivariate Count Data
+Title: Flexible Modeling of Multivariate Count Data via the multivariate Conway-Maxwell-Poisson distribution
 Version: 1.0
 Authors@R: c(
     person("Kimberly", "Sellers", email = "Kimberly.Sellers@georgetown.edu", role = "aut"),

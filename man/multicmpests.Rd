@@ -9,7 +9,7 @@ multicmpests(data, max = 100, startvalues = NULL)
 \arguments{
 \item{data}{A two-column dataset of counts.}
 
-\item{max}{Truncation term for infinite summation associated the z function. See paper for details.}
+\item{max}{Truncation term for infinite summation associated with the Z function. See Sellers et al. (2016) for details.}
 
 \item{startvalues}{A vector of starting values for maximum likelihood estimation. The values are read as follows: c(lambda, nu, p00, p10, p01, p11).
 The default is c(1,1, 0.25, 0.25, 0.25, 0.25).}
@@ -19,12 +19,15 @@ The default is c(1,1, 0.25, 0.25, 0.25, 0.25).}
     $pbpd (Dispersion Test P-Value).
 }
 \description{
-\code{multicmpests} computes the maximum likelihood estimates of a bivariate COM-Poisson distribution for given count data and conducts a test for significant data dispersion, relative to a bivariate poisson model.
-    The bivariate case is addressed via the bivpois package by Karlis and Ntzoufras.
+\code{multicmpests} computes the maximum likelihood estimates of a bivariate COM-Poisson distribution (based on the model described in Sellers et al. (2016)) for given count data and conducts a test for significant data dispersion, relative to a bivariate Poisson model.
+    The bivariate Poisson case is addressed via the bivpois package by Karlis and Ntzoufras (2009).
 }
 \examples{
 ## Standard usage
 data(accidents)
 multicmpests(accidents)
 
+}
+\references{
+Sellers, K. et al. (2016). Bivariate Conway-Maxwell-Poisson distribution: Formulation, properties, and inference. Journal of Multivariate Analysis 150 (2016) 152-168.
 }
