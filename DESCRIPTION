@@ -4,7 +4,7 @@ Title: Flexible Modeling of Multivariate Count Data via the multivariate Conway-
 Version: 1.0
 Authors@R: c(
     person("Kimberly", "Sellers", email = "Kimberly.Sellers@georgetown.edu", role = "aut"),
-    person("Darcy" , "Steeg Morris", email = "dls333@cornell.edu" , role = "aut"),
+    person("Darcy" , "Steeg Morris", role = "aut"),
     person("Narayanaswamy" , "Balakrishnan" , role = "aut"),
     person("Diag", "Davenport", email = "diag.davenport@gmail.com",  role = c("aut", "cre"))
     )

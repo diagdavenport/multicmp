@@ -2,7 +2,7 @@
 % Please edit documentation in R/multicmpests.R
 \name{multicmpests}
 \alias{multicmpests}
-\title{Bivariate COM-Poisson Parameter Estimation.}
+\title{Bivariate COM-Poisson Parameter Estimation}
 \usage{
 multicmpests(data, max = 100, startvalues = NULL)
 }
@@ -29,5 +29,7 @@ multicmpests(accidents)
 
 }
 \references{
-Sellers, K. et al. (2016). Bivariate Conway-Maxwell-Poisson distribution: Formulation, properties, and inference. Journal of Multivariate Analysis 150 (2016) 152-168.
+Sellers KF, Morris DS, Balakrishnan N (2016) Bivariate Conway-Maxwell-Poisson Distribution: Formulation, Properties, and Inference, Journal of Multivariate Analysis 150:152-168.
+    
+    Karlis D., Ntzoufras I. (2009) bivpois: Bivariate Poisson Models Using the EM Algorithm, Version 0.50-3.1. http://cran.wustl.edu/web/packages/bivpois/index.html
 }
