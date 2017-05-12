@@ -14,11 +14,6 @@
 #'     Sellers KF, Morris DS, Balakrishnan N (2016) Bivariate Conway-Maxwell-Poisson Distribution: Formulation, Properties, and Inference, Journal of Multivariate Analysis 150:152-168.
 #'     
 #'     Karlis D., Ntzoufras I. (2009) bivpois: Bivariate Poisson Models Using the EM Algorithm, Version 0.50-3.1. http://cran.wustl.edu/web/packages/bivpois/index.html
-#' 
-#' @examples
-#' ## Standard usage
-#' data(accidents)
-#' multicmpests(accidents)
 #'
 #' @import utils
 #' @import numDeriv

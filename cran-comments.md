@@ -1,3 +1,9 @@
+## Resubmission
+
+This is a resubmission. In this version I have:
+
+* removed the example from multicmpests due to excessive run time
+
 ## Test environments
 
 * win-builder (devel and release)
