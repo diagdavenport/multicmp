@@ -15,6 +15,14 @@
 #'     
 #'     Karlis D., Ntzoufras I. (2009) bivpois: Bivariate Poisson Models Using the EM Algorithm, Version 0.50-3.1. http://cran.wustl.edu/web/packages/bivpois/index.html
 #'
+#' @examples 
+#'     x1 <- c(3,2,5,4,1)
+#'     x2 <- c(0,4,1,0,1)
+#'     ex.data <- cbind(x1,x2)
+#'     
+#'     # starting close to the optimum for sake of run time
+#'     multicmpests(ex.data, startvalues = c(12.5 , 1.7 , 0, 0.25, 0.75, 0)) 
+#' 
 #' @import utils
 #' @import numDeriv
 #' @import stats

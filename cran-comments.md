@@ -2,7 +2,7 @@
 
 This is a resubmission. In this version I have:
 
-* removed the example from multicmpests due to excessive run time
+* introduce example for multicmpests with run time < 5s
 
 ## Test environments
 

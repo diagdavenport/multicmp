@@ -22,6 +22,15 @@ The default is c(1,1, 0.25, 0.25, 0.25, 0.25).}
 \code{multicmpests} computes the maximum likelihood estimates of a bivariate COM-Poisson distribution (based on the model described in Sellers et al. (2016)) for given count data and conducts a test for significant data dispersion, relative to a bivariate Poisson model.
     The bivariate Poisson case is addressed via the bivpois package by Karlis and Ntzoufras (2009).
 }
+\examples{
+    x1 <- c(3,2,5,4,1)
+    x2 <- c(0,4,1,0,1)
+    ex.data <- cbind(x1,x2)
+    
+    # starting close to the optimum for sake of run time
+    multicmpests(ex.data, startvalues = c(12.5 , 1.7 , 0, 0.25, 0.75, 0)) 
+
+}
 \references{
 Sellers KF, Morris DS, Balakrishnan N (2016) Bivariate Conway-Maxwell-Poisson Distribution: Formulation, Properties, and Inference, Journal of Multivariate Analysis 150:152-168.
     
