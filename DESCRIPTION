@@ -17,4 +17,4 @@ URL: http://dx.doi.org/10.1016/j.jmva.2016.04.007
 BugReports: https://github.com/diagdavenport/multicmp/issues
 License: GPL-3
 LazyData: TRUE
-RoxygenNote: 6.0.0
+RoxygenNote: 6.0.1

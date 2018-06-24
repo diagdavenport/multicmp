@@ -2,9 +2,12 @@
 % Please edit documentation in R/multicmpests.R
 \name{multicmpests}
 \alias{multicmpests}
+\alias{dbivCMP}
 \title{Bivariate COM-Poisson Parameter Estimation}
 \usage{
 multicmpests(data, max = 100, startvalues = NULL)
+
+dbivCMP(lambda, nu, bivprob, x, y, maxit)
 }
 \arguments{
 \item{data}{A two-column dataset of counts.}
@@ -22,6 +25,11 @@ The default is c(1,1, 0.25, 0.25, 0.25, 0.25).}
 \code{multicmpests} computes the maximum likelihood estimates of a bivariate COM-Poisson distribution (based on the model described in Sellers et al. (2016)) for given count data and conducts a test for significant data dispersion, relative to a bivariate Poisson model.
     The bivariate Poisson case is addressed via the bivpois package by Karlis and Ntzoufras (2009).
 }
+\section{Functions}{
+\itemize{
+\item \code{dbivCMP}: Returns the probability of bivariate distribution at (x,y), given the following inputs: (lambda, nu, bivprob, x, y, maxit)
+}}
+
 \examples{
     x1 <- c(3,2,5,4,1)
     x2 <- c(0,4,1,0,1)

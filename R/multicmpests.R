@@ -128,6 +128,8 @@ suma <- function(bivprob, x, y, n){
 }
 
 
+#' @describeIn multicmpests Returns the probability of bivariate distribution at (x,y), given the following inputs: (lambda, nu, bivprob, x, y, maxit)
+
 ######################################################################
 ## Program name: dbivCMP.R                                          ##
 ## Authors: Kimberly Sellers and Darcy Steeg Morris                 ##
