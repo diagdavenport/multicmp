@@ -128,8 +128,30 @@ suma <- function(bivprob, x, y, n){
 }
 
 
-#' @describeIn multicmpests Returns the probability of bivariate distribution at (x,y), given the following inputs: (lambda, nu, bivprob, x, y, maxit)
-
+#' The Bivariate Conway-Maxwell-Poisson Distribution
+#'
+#' Density for the Bivariate Conway-Maxwell-Poisson (CMP) distribution
+#'
+#' @param lambda Mean/rate parameter under Poisson model.
+#' @param nu  Dispersion parameter.
+#' @param bivprob Bivariate probabilities, {p00, p01, p10, p11}.
+#' @param x x values
+#' @param y y values
+#' @param maxit Number of terms used to truncate infinite sum calculations.
+#'     
+#' @references 
+#' Sellers KF, Morris DS, Balakrishnan N (2016) Bivariate Conway-Maxwell-Poisson Distribution: Formulation, Properties, and Inference, Journal of Multivariate Analysis 150:152-168.
+#' 
+#' @examples 
+#' dbivCMP(lambda=10, nu=1, bivprob=c(0.4, 0.2, 0.3, 0.1), x=2, y=3, maxit = 100) 
+#' #this is equivalent to the pmf P(X=2,Y=3) of a bivariate Poisson 
+#' ##with lambda1=3, lambda2=2, lambda3=1
+#' 
+#' @import utils
+#' @import numDeriv
+#' @import stats
+#'
+#' @export
 ######################################################################
 ## Program name: dbivCMP.R                                          ##
 ## Authors: Kimberly Sellers and Darcy Steeg Morris                 ##
